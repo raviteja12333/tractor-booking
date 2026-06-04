@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Admin – KisanShakti Bookings{% endblock %}
+
+{% block content %}
+
+<!-- ── ADMIN HEADER ── -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid));padding:50px 0 30px;">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div>
+      <div class="section-tag" style="color:var(--amber);border-color:rgba(245,166,35,0.4);background:rgba(245,166,35,0.1);">Dashboard</div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--white);letter-spacing:2px;margin-bottom:4px;">
+        ADMIN <span style="color:var(--amber)">PANEL</span>
+      </h1>
+      <p style="color:rgba(255,255,255,0.65);margin:0;">All tractor booking requests</p>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="/" style="background:rgba(255,255,255,0.12);color:var(--white);padding:10px 18px;border-radius:8px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;">
+        ← Back to Site
+      </a>
+      <a href="/booking" class="btn-primary-custom" style="padding:10px 18px;font-size:1rem;">+ New Booking</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div style="background:var(--green-dark);border-top:1px solid rgba(255,255,255,0.08);">
+  <div class="container">
+    <div class="row g-0 text-center">
+      <div class="col-6 col-md-3" style="padding:20px;border-right:1px solid rgba(255,255,255,0.08);">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--amber);">{{ bookings|length }}</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Total Bookings</div>
+      </div>
+      <div class="col-6 col-md-3" style="padding:20px;border-right:1px solid rgba(255,255,255,0.08);">
+        {% set total_acres = bookings | sum(attribute='acres') %}
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--amber);">{{ "%.1f"|format(total_acres) }}</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Total Acres</div>
+      </div>
+      <div class="col-6 col-md-3" style="padding:20px;border-right:1px solid rgba(255,255,255,0.08);">
+        {% set unique_villages = bookings | map(attribute='village') | list | unique | list | length %}
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--amber);">{{ unique_villages }}</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Villages</div>
+      </div>
+      <div class="col-6 col-md-3" style="padding:20px;">
+        {% if bookings %}
+          {% set latest = bookings[0].created_at.strftime('%d %b') %}
+        {% else %}
+          {% set latest = "—" %}
+        {% endif %}
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--amber);">{{ latest }}</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Latest Booking</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BOOKINGS TABLE ── -->
+<section class="section-pad">
+  <div class="container">
+
+    {% if bookings %}
+    <!-- Search/Filter bar -->
+    <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
+      <input type="text" id="searchInput" class="form-control" placeholder="🔍 Search by name, village, or service…" style="max-width:360px;" oninput="filterTable()">
+      <span class="text-muted" style="font-size:0.85rem;" id="countLabel">{{ bookings|length }} bookings</span>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover admin-table" id="bookingsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Village</th>
+            <th>Service</th>
+            <th>Acres</th>
+            <th>Date</th>
+            <th>Booked On</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in bookings %}
+          <tr>
+            <td><strong style="color:var(--text-muted);">#{{ b.id }}</strong></td>
+            <td><strong>{{ b.name }}</strong></td>
+            <td>
+              <a href="tel:+91{{ b.mobile }}" style="color:var(--green-mid);text-decoration:none;font-weight:600;">
+                {{ b.mobile }}
+              </a>
+            </td>
+            <td>{{ b.village }}</td>
+            <td><span class="badge-service">{{ b.service }}</span></td>
+            <td>{{ b.acres }} ac</td>
+            <td>{{ b.booking_date.strftime('%d %b %Y') }}</td>
+            <td style="font-size:0.78rem;color:var(--text-muted);">{{ b.created_at.strftime('%d %b, %H:%M') }}</td>
+            <td>
+              <div class="d-flex gap-1 flex-wrap">
+                <!-- WhatsApp customer -->
+                <a href="https://wa.me/91{{ b.mobile }}?text=Hello%20{{ b.name|urlencode }}%2C%20your%20booking%20for%20{{ b.service|urlencode }}%20on%20{{ b.booking_date.strftime('%d %b %Y')|urlencode }}%20is%20confirmed.%20Thank%20you!%20-%20KisanShakti"
+                   target="_blank"
+                   class="btn btn-sm" title="WhatsApp customer"
+                   style="background:#25d366;color:white;padding:4px 10px;font-size:0.78rem;border-radius:6px;font-weight:600;">
+                  <i class="bi bi-whatsapp"></i>
+                </a>
+                <!-- Delete -->
+                <form method="POST" action="/admin/delete/{{ b.id }}" onsubmit="return confirm('Delete booking #{{ b.id }}?');" style="display:inline;">
+                  <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete" style="padding:4px 10px;font-size:0.78rem;">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% else %}
+    <!-- Empty state -->
+    <div class="text-center py-5">
+      <div style="font-size:4rem;margin-bottom:16px;">📋</div>
+      <h4 style="font-family:'Rajdhani',sans-serif;color:var(--green-dark);">No bookings yet</h4>
+      <p class="text-muted">Once customers submit the booking form, their details will appear here.</p>
+      <a href="/booking" class="btn-primary-custom mt-2" style="display:inline-flex;">📋 Go to Booking Form</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function filterTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const rows = document.querySelectorAll('#bookingsTable tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const show = text.includes(q);
+    row.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('countLabel').textContent = visible + ' bookings';
+}
+</script>
+{% endblock %}

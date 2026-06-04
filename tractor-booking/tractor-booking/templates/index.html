@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% block title %}KisanShakti – Trusted Tractor Services{% endblock %}
+
+{% block content %}
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content col-lg-8">
+      <div class="hero-badge fade-in-up">🌾 Trusted by Farmers Since 2010</div>
+      <h1 class="hero-title fade-in-up delay-1">
+        POWERFUL<br>
+        <span class="accent">TRACTOR</span><br>
+        SERVICES
+      </h1>
+      <p class="hero-subtitle fade-in-up delay-2">
+        From ploughing to harvesting — we bring modern machinery to your fields.<br>
+        Managed by <strong style="color:var(--amber);">Ram Babu</strong> — trusted by 500+ farmers.
+      </p>
+      <div class="hero-stats fade-in-up delay-3">
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Farmers Served</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5000+</div>
+          <div class="stat-label">Acres Worked</div>
+        </div>
+      </div>
+      <div class="hero-cta fade-in-up delay-4">
+        <a href="/booking" class="btn-primary-custom">📋 Book Tractor Now</a>
+        <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" class="btn-outline-custom">
+          <i class="bi bi-whatsapp"></i> WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY CHOOSE US ── -->
+<section class="why-section section-pad-sm">
+  <div class="container">
+    <div class="row g-0 text-center">
+      <div class="col-6 col-lg-3">
+        <div class="why-card">
+          <div class="why-num">24/7</div>
+          <div class="why-label">Available</div>
+          <div class="why-sub">Even on weekends</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="why-card" style="border-left:1px solid rgba(255,255,255,0.08)">
+          <div class="why-num">5%</div>
+          <div class="why-label">Discount</div>
+          <div class="why-sub">On first booking</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="why-card" style="border-left:1px solid rgba(255,255,255,0.08)">
+          <div class="why-num">3</div>
+          <div class="why-label">Tractors Ready</div>
+          <div class="why-sub">Modern machinery</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="why-card" style="border-left:1px solid rgba(255,255,255,0.08)">
+          <div class="why-num">⭐ 4.9</div>
+          <div class="why-label">Farmer Rating</div>
+          <div class="why-sub">Verified reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="section-pad">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="section-title">OUR SERVICES</h2>
+      <div class="section-line mx-auto"></div>
+      <p class="text-muted" style="max-width:500px;margin:0 auto;">Complete farming solutions with modern equipment for every stage of your crop cycle.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">🌱</div>
+          <div class="service-title">Land Ploughing</div>
+          <p class="service-desc">Deep ploughing and soil preparation for optimal crop growth. Suitable for all soil types.</p>
+          <span class="service-price">₹700 / Acre+</span>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">🔄</div>
+          <div class="service-title">Rotavator Work</div>
+          <p class="service-desc">Fine soil tilth preparation using rotavator for seed bed creation and residue management.</p>
+          <span class="service-price">₹2000 / Acre+</span>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">🌾</div>
+          <div class="service-title">Dhammu / Seeding</div>
+          <p class="service-desc">Precision seed drilling and planting for wheat, paddy, maize, and other crops.</p>
+          <span class="service-price">₹600 / Acre+</span>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">⛏️</div>
+          <div class="service-title">Mining / Ground Levelling</div>
+          <p class="service-desc">Heavy-duty ground levelling and mining work for land development and site preparation.</p>
+          <span class="service-price">₹14000 / hr</span>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">🚛</div>
+          <div class="service-title">Transportation – Road</div>
+          <p class="service-desc">Trolley-based crop and material transport from field to mandi or storage.</p>
+          <span class="service-price">₹15 / bag</span>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon">🚜</div>
+          <div class="service-title">Transportation – Field</div>
+          <p class="service-desc">Trolley-based crop and material transport within field to mandi or storage.</p>
+          <span class="service-price">₹1000 / Acre+</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="/booking" class="btn-primary-custom">📋 Book a Service Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section-pad" style="background:var(--white)">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Simple Process</div>
+      <h2 class="section-title">HOW IT WORKS</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="row g-4 align-items-center">
+      <div class="col-md-3 text-center">
+        <div style="font-size:3rem;margin-bottom:12px;">🌐</div>
+        <div class="why-num" style="color:var(--green-mid);">01</div>
+        <h5 class="mt-1" style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark)">Visit Website</h5>
+        <p class="text-muted" style="font-size:0.85rem">Open KisanShakti on your phone or computer</p>
+      </div>
+      <div class="col-md-1 text-center d-none d-md-block" style="font-size:2rem;color:var(--amber)">→</div>
+      <div class="col-md-3 text-center">
+        <div style="font-size:3rem;margin-bottom:12px;">📋</div>
+        <div class="why-num" style="color:var(--green-mid);">02</div>
+        <h5 class="mt-1" style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark)">Fill Booking Form</h5>
+        <p class="text-muted" style="font-size:0.85rem">Enter your details, service type, acres & date</p>
+      </div>
+      <div class="col-md-1 text-center d-none d-md-block" style="font-size:2rem;color:var(--amber)">→</div>
+      <div class="col-md-3 text-center">
+        <div style="font-size:3rem;margin-bottom:12px;">📲</div>
+        <div class="why-num" style="color:var(--green-mid);">03</div>
+        <h5 class="mt-1" style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark)">WhatsApp Confirm</h5>
+        <p class="text-muted" style="font-size:0.85rem">Send details to us via WhatsApp — 1 tap!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section-pad">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Happy Farmers</div>
+      <h2 class="section-title">WHAT THEY SAY</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">Excellent service! The tractor arrived on time and the ploughing was done perfectly. Very honest pricing. Highly recommend KisanShakti.</p>
+          <div class="testimonial-author">Raju Yadav</div>
+          <div class="testimonial-village">Dongarkhed Village</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">Booked rotavator work through the website. Very easy process! The WhatsApp message was sent instantly. Great work completed in just 2 hours.</p>
+          <div class="testimonial-author">Santosh Patil</div>
+          <div class="testimonial-village">Nanded District</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">I've been using their service for 3 years. Always reliable. The booking form on the website saved me so much time compared to calling.</p>
+          <div class="testimonial-author">Ganesh Shinde</div>
+          <div class="testimonial-village">Hingoli Village</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid));padding:60px 0;">
+  <div class="container text-center">
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--white);letter-spacing:2px;margin-bottom:12px;">
+      READY TO BOOK YOUR <span style="color:var(--amber)">TRACTOR?</span>
+    </h2>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:28px;">Quick booking. Fast service. Direct confirmation via WhatsApp.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="/booking" class="btn-primary-custom">📋 Book Now</a>
+      <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" class="btn-outline-custom">
+        <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Gallery – KisanShakti{% endblock %}
+
+{% block content %}
+
+<!-- ── PAGE HEADER ── -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid));padding:60px 0 40px;">
+  <div class="container">
+    <div class="section-tag" style="color:var(--amber);border-color:rgba(245,166,35,0.4);background:rgba(245,166,35,0.1);">Our Work</div>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);letter-spacing:2px;margin-bottom:8px;">
+      PHOTO <span style="color:var(--amber)">GALLERY</span>
+    </h1>
+    <p style="color:rgba(255,255,255,0.7);">See our tractors in action across villages and fields.</p>
+  </div>
+</section>
+
+<!-- ── GALLERY GRID ── -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row g-3">
+
+      <!-- Each gallery item uses a colored placeholder (replace src with real photos) -->
+      {% set gallery_items = [
+        ("🚜", "Ploughing Session", "Dongarkhed Village – March 2025", "#1a5c38"),
+        ("🌾", "Wheat Field Harvesting", "Nanded – January 2025", "#5c8a1a"),
+        ("🔄", "Rotavator Work", "Cotton Field Prep – April 2025", "#1a3a5c"),
+        ("🚛", "Trolley Transport", "Grain Delivery to Mandi", "#5c3a1a"),
+        ("💧", "Land Levelling", "Laser Levelling Project", "#1a5c5c"),
+        ("🌱", "Seeding Operation", "Soybean Seeding – June 2025", "#3a5c1a"),
+        ("🚜", "Multi-Acre Ploughing", "Large Farm – Hingoli", "#5c1a1a"),
+        ("🌾", "Paddy Field Work", "Paddy Preparation – July 2025", "#1a4a1a"),
+        ("⚙️", "Equipment Ready", "Tractor Maintenance Day", "#3a1a5c"),
+      ] %}
+
+      {% for icon, title, caption, color in gallery_items %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="gallery-thumb">
+          <div style="background:linear-gradient(135deg,{{ color }},{{ color }}99);
+                      height:200px;display:flex;align-items:center;justify-content:center;
+                      font-size:4rem;cursor:pointer;transition:0.3s;"
+               onclick="openLightbox('{{ icon }}','{{ title }}','{{ caption }}')"
+               onmouseover="this.style.transform='scale(1.04)'"
+               onmouseout="this.style.transform='scale(1)'">
+            {{ icon }}
+          </div>
+          <div style="padding:10px 12px;background:var(--white);">
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;color:var(--green-dark);">{{ title }}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);">{{ caption }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Upload your photos box -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="gallery-thumb" style="border:2px dashed var(--border);background:rgba(45,134,83,0.04);height:100%;">
+          <div style="height:200px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--green-muted);">
+            📷
+          </div>
+          <div style="padding:10px 12px;background:transparent;text-align:center;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:0.85rem;color:var(--text-muted);">Add your own photos in <code>static/images/</code></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Instructions for real photos -->
+    <div class="mt-5 p-4 rounded-3" style="background:rgba(245,166,35,0.08);border:1.5px solid rgba(245,166,35,0.25);">
+      <h5 style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--amber-dark);">📸 Add Real Photos</h5>
+      <p class="mb-1" style="font-size:0.9rem;color:var(--text-muted);">
+        To replace the placeholders with real tractor photos, save your images to
+        <code>static/images/</code> and update the gallery items in <code>templates/gallery.html</code>.
+      </p>
+      <p class="mb-0" style="font-size:0.85rem;color:var(--text-muted);">
+        Use <code>&lt;img src="{{ url_for('static', filename='images/your-photo.jpg') }}" class="gallery-img"&gt;</code>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIGHTBOX MODAL ── -->
+<div id="lightboxModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--white);border-radius:var(--radius-lg);max-width:480px;width:90%;padding:32px;text-align:center;position:relative;">
+    <button onclick="closeLightbox()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);">✕</button>
+    <div id="lbIcon" style="font-size:7rem;margin-bottom:16px;"></div>
+    <h4 id="lbTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark);"></h4>
+    <p id="lbCaption" style="color:var(--text-muted);font-size:0.9rem;"></p>
+    <a href="/booking" class="btn-primary-custom mt-2" style="display:inline-flex;">📋 Book This Service</a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openLightbox(icon, title, caption) {
+  document.getElementById('lbIcon').textContent = icon;
+  document.getElementById('lbTitle').textContent = title;
+  document.getElementById('lbCaption').textContent = caption;
+  document.getElementById('lightboxModal').style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightboxModal').style.display = 'none';
+}
+document.getElementById('lightboxModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,388 @@
+{% extends "base.html" %}
+{% block title %}Book Tractor – KisanShakti{% endblock %}
+
+{% block content %}
+
+<!-- ── PAGE HEADER ── -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid));padding:60px 0 40px;">
+  <div class="container">
+    <div class="section-tag" style="color:var(--amber);border-color:rgba(245,166,35,0.4);background:rgba(245,166,35,0.1);">Easy Booking</div>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);letter-spacing:2px;margin-bottom:8px;">
+      BOOK A <span style="color:var(--amber)">TRACTOR</span>
+    </h1>
+    <p style="color:rgba(255,255,255,0.7);">Fill the form — saved to database &amp; sent to <strong style="color:var(--amber);">Ram Babu</strong> via WhatsApp instantly.</p>
+  </div>
+</section>
+
+<!-- ── RAM BABU OWNER BANNER ── -->
+<div style="background:var(--amber);padding:14px 0;">
+  <div class="container d-flex align-items-center justify-content-center gap-3 flex-wrap text-center">
+    <span style="font-size:1.6rem;">🚜</span>
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--green-dark);letter-spacing:2px;">
+      TRACTOR OWNER: <span style="font-size:2.2rem;letter-spacing:4px;">RAM BABU</span>
+    </span>
+    <span style="font-size:1.6rem;">🚜</span>
+    <a href="tel:+91{{ whatsapp_number[2:] }}"
+       style="background:var(--green-dark);color:var(--white);padding:8px 20px;border-radius:8px;
+              text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;">
+      📞 Call Ram Babu
+    </a>
+    <a href="https://wa.me/{{ whatsapp_number }}" target="_blank"
+       style="background:#25d366;color:var(--white);padding:8px 20px;border-radius:8px;
+              text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;">
+      💬 WhatsApp Ram Babu
+    </a>
+  </div>
+</div>
+
+<!-- ── BOOKING FORM ── -->
+<section class="booking-section section-pad">
+  <div class="container">
+    <div class="row justify-content-center g-4">
+
+      <!-- FORM -->
+      <div class="col-lg-7">
+        <div class="booking-card">
+          <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark);font-size:1.5rem;margin-bottom:4px;">
+            🚜 Tractor Booking Form
+          </h3>
+          <p class="text-muted mb-4" style="font-size:0.9rem;">
+            Submit the form — your booking is saved and <strong>Ram Babu</strong> gets notified on WhatsApp automatically.
+          </p>
+
+          <form id="bookingForm" novalidate>
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label class="form-label" for="customerName">👤 Customer Name</label>
+                <input type="text" class="form-control" id="customerName"
+                       placeholder="Enter your full name" required minlength="2"/>
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="mobileNumber">📞 Mobile Number</label>
+                <input type="tel" class="form-control" id="mobileNumber"
+                       placeholder="10-digit mobile number" required
+                       pattern="[6-9][0-9]{9}" maxlength="10"/>
+                <div class="invalid-feedback">Enter a valid 10-digit mobile number.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="village">🏘️ Village / Location</label>
+                <input type="text" class="form-control" id="village"
+                       placeholder="Your village name" required/>
+                <div class="invalid-feedback">Please enter your village name.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="serviceType">⚙️ Service Type</label>
+                <select class="form-select" id="serviceType" required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="Land Ploughing">Land Ploughing – ₹700/acre+</option>
+                  <option value="Rotavator Work">Rotavator Work – ₹2000/acre+</option>
+                  <option value="Dhammu / Seeding">Dhammu / Seeding – ₹600/acre+</option>
+                  <option value="Mining / Ground Levelling">Mining / Ground Levelling – ₹14000/hr</option>
+                  <option value="Transportation - Road">Transportation – Road – ₹15/bag</option>
+                  <option value="Transportation - Field">Transportation – Field – ₹1000/acre+</option>
+                </select>
+                <div class="invalid-feedback">Please select a service.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="acres">🌾 Number of Acres</label>
+                <input type="number" class="form-control" id="acres"
+                       placeholder="e.g. 3.5" min="0.5" max="100" step="0.5" required/>
+                <div class="invalid-feedback">Please enter a valid number of acres.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" for="bookingDate">📅 Preferred Date</label>
+                <input type="date" class="form-control" id="bookingDate" required/>
+                <div class="invalid-feedback">Please select a date.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" for="notes">📝 Additional Notes <span class="text-muted fw-normal">(Optional)</span></label>
+                <textarea class="form-control" id="notes" rows="2"
+                          placeholder="Any special instructions or field details…"></textarea>
+              </div>
+
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn-submit">
+                  🚜 Submit Booking — Notify Ram Babu
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- Steps info -->
+        <div class="mt-4 p-3 rounded-3" style="background:rgba(45,134,83,0.07);border:1px solid var(--border);">
+          <strong style="font-family:'Rajdhani',sans-serif;color:var(--green-dark);">ℹ️ What happens after you submit?</strong>
+          <ol style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;padding-left:18px;line-height:2.2;margin-bottom:0;">
+            <li>Your booking details are <strong>saved to database</strong></li>
+            <li>WhatsApp opens with all details — press <strong>Send</strong> to notify <strong>Ram Babu</strong></li>
+            <li><strong>Ram Babu</strong> will call you within 30 minutes to confirm your slot</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-lg-4">
+
+        <!-- Ram Babu card -->
+        <div class="booking-card mb-4" style="padding:28px 22px;border-top:4px solid var(--amber);">
+          <div style="text-align:center;margin-bottom:18px;">
+            <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--green-dark),var(--green-mid));
+                        border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;
+                        justify-content:center;font-size:2.2rem;border:3px solid var(--amber);">
+              👨‍🌾
+            </div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--green-dark);
+                        letter-spacing:3px;line-height:1;">RAM BABU</div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-top:3px;">Tractor Owner &amp; Operator</div>
+            <div style="display:flex;justify-content:center;gap:4px;margin-top:6px;">
+              <span style="color:var(--amber);">★★★★★</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);">500+ farmers served</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2">
+            <a href="tel:+91{{ whatsapp_number[2:] }}"
+               style="background:var(--green-dark);color:var(--white);border-radius:10px;padding:13px 16px;
+                      text-decoration:none;display:flex;align-items:center;gap:10px;
+                      font-family:'Rajdhani',sans-serif;font-weight:600;"
+               onmouseover="this.style.background='var(--green-mid)'"
+               onmouseout="this.style.background='var(--green-dark)'">
+              <i class="bi bi-telephone-fill" style="font-size:1.2rem;color:var(--amber)"></i>
+              <div>Call Ram Babu<br><small style="font-weight:400;opacity:0.7">+91 {{ whatsapp_number[2:] }}</small></div>
+            </a>
+            <a href="https://wa.me/{{ whatsapp_number }}" target="_blank"
+               style="background:#25d366;color:var(--white);border-radius:10px;padding:13px 16px;
+                      text-decoration:none;display:flex;align-items:center;gap:10px;
+                      font-family:'Rajdhani',sans-serif;font-weight:600;">
+              <i class="bi bi-whatsapp" style="font-size:1.2rem;"></i>
+              <div>WhatsApp Ram Babu<br><small style="font-weight:400;opacity:0.85">Quick reply guaranteed</small></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Price guide -->
+        <div class="booking-card" style="padding:22px;">
+          <h5 style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--green-dark);margin-bottom:12px;">💰 Price Guide</h5>
+          <table class="table table-sm mb-1" style="font-size:0.85rem;">
+            <tbody>
+              <tr><td>Land Ploughing</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹700/ac+</td></tr>
+              <tr><td>Rotavator</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹2000/ac+</td></tr>
+              <tr><td>Dhammu/Seeding</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹600/ac+</td></tr>
+              <tr><td>Mining/Levelling</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹14000/hr</td></tr>
+              <tr><td>Transport-Road</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹15/bag</td></tr>
+              <tr><td>Transport-Field</td><td class="text-end fw-bold" style="color:var(--green-mid)">₹1000/ac+</td></tr>
+            </tbody>
+          </table>
+          <p class="text-muted mb-0" style="font-size:0.75rem;">* Prices may vary based on field conditions.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SUCCESS MODAL
+════════════════════════════════════════════ -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0" style="background:transparent;">
+      <div class="success-modal-content">
+
+        <!-- STEP 1: Saved + WhatsApp ready -->
+        <div id="step1">
+          <div style="font-size:3rem;margin-bottom:8px;">✅</div>
+          <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green-dark);letter-spacing:1px;margin-bottom:4px;">
+            BOOKING SAVED!
+          </h4>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">
+            Now send details to <strong style="color:var(--green-dark);font-size:1rem;">RAM BABU</strong> on WhatsApp.
+          </p>
+
+          <div style="background:#f0faf4;border:1.5px solid #b2dfca;border-radius:10px;
+                      padding:14px 16px;text-align:left;font-size:0.85rem;line-height:2;margin-bottom:16px;">
+            <div id="summaryBox"></div>
+          </div>
+
+          <a id="waOpenBtn" href="#" target="_blank"
+             class="whatsapp-send-btn w-100 justify-content-center mb-2"
+             onclick="markSent()" style="font-size:1.05rem;padding:15px;">
+            <i class="bi bi-whatsapp" style="font-size:1.4rem;"></i>
+            Send to RAM BABU via WhatsApp
+          </a>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:10px;">
+            WhatsApp opens with all details — just press <strong>Send ▶</strong>
+          </p>
+          <button class="btn btn-sm btn-outline-secondary" onclick="showNotSent()">
+            WhatsApp didn't open / I couldn't send
+          </button>
+        </div>
+
+        <!-- STEP 2A: Sent! -->
+        <div id="step2sent" style="display:none;">
+          <div style="font-size:3.5rem;margin-bottom:10px;">🎉</div>
+          <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green-dark);letter-spacing:1px;margin-bottom:12px;">
+            MESSAGE SENT!
+          </h4>
+          <div style="background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:12px;
+                      padding:16px;margin-bottom:14px;text-align:left;">
+            <p style="margin:0;font-size:0.9rem;color:#2e7d32;line-height:2.2;">
+              ✅ <strong>Booking saved to database</strong><br>
+              ✅ <strong>WhatsApp sent to Ram Babu</strong><br>
+              📞 <strong>Ram Babu will call you soon to confirm</strong>
+            </p>
+          </div>
+          <div style="background:rgba(245,166,35,0.1);border:1.5px solid rgba(245,166,35,0.4);
+                      border-radius:10px;padding:12px;margin-bottom:16px;">
+            <p style="margin:0;font-size:0.85rem;color:var(--green-dark);">
+              📋 Booking ID: <strong id="bookingIdDisplay">—</strong><br>
+              <span style="font-size:0.75rem;color:var(--text-muted);">Save this for reference</span>
+            </p>
+          </div>
+          <button onclick="closeAndReset()"
+            style="background:var(--green-mid);color:white;border:none;padding:13px 32px;
+                   border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;
+                   font-size:1.1rem;cursor:pointer;width:100%;">
+            Done ✓
+          </button>
+        </div>
+
+        <!-- STEP 2B: Not sent -->
+        <div id="step2notsent" style="display:none;">
+          <div style="font-size:3rem;margin-bottom:8px;">⚠️</div>
+          <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#b45309;letter-spacing:1px;margin-bottom:10px;">
+            WHATSAPP NOT SENT
+          </h4>
+          <div style="background:#fff8e1;border:1.5px solid #ffd54f;border-radius:10px;
+                      padding:14px;margin-bottom:14px;text-align:left;">
+            <p style="margin:0;font-size:0.88rem;color:#7c5700;line-height:2.1;">
+              ✅ <strong>Booking is saved to database</strong><br>
+              ⚠️ WhatsApp was <strong>not sent to Ram Babu</strong> yet<br>
+              👇 Contact Ram Babu directly below:
+            </p>
+          </div>
+          <div class="d-flex flex-column gap-2 mb-3">
+            <a id="waRetryBtn" href="#" target="_blank"
+               class="whatsapp-send-btn justify-content-center" onclick="markSent()">
+              <i class="bi bi-whatsapp"></i> Retry — Send WhatsApp to Ram Babu
+            </a>
+            <a href="tel:+91{{ whatsapp_number[2:] }}"
+               style="background:var(--green-dark);color:white;border-radius:8px;padding:12px;
+                      text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;
+                      display:flex;align-items:center;justify-content:center;gap:8px;font-size:1rem;">
+              <i class="bi bi-telephone-fill"></i> Call Ram Babu Directly
+            </a>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary w-100" onclick="closeAndReset()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Min date = today
+const dateInput = document.getElementById('bookingDate');
+if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+let currentWaUrl = '#';
+
+document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!this.checkValidity()) { this.classList.add('was-validated'); return; }
+
+  const btn = this.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Saving &amp; notifying Ram Babu…';
+
+  const name        = document.getElementById('customerName').value.trim();
+  const mobile      = document.getElementById('mobileNumber').value.trim();
+  const village     = document.getElementById('village').value.trim();
+  const service     = document.getElementById('serviceType').value;
+  const acres       = document.getElementById('acres').value;
+  const bookingDate = document.getElementById('bookingDate').value;
+  const notes       = document.getElementById('notes').value.trim();
+
+  try {
+    const res    = await fetch('/submit-booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, mobile, village, service, acres, booking_date: bookingDate, notes })
+    });
+    const result = await res.json();
+
+    if (result.success) {
+      const niceDate = new Date(bookingDate + 'T00:00:00')
+        .toLocaleDateString('en-IN', { day:'2-digit', month:'long', year:'numeric' });
+
+      document.getElementById('summaryBox').innerHTML =
+        `👤 <strong>Name:</strong> ${name}<br>` +
+        `📞 <strong>Mobile:</strong> ${mobile}<br>` +
+        `🏘️ <strong>Village:</strong> ${village}<br>` +
+        `⚙️ <strong>Service:</strong> ${service}<br>` +
+        `🌾 <strong>Acres:</strong> ${acres}<br>` +
+        `📅 <strong>Date:</strong> ${niceDate}`;
+
+      document.getElementById('bookingIdDisplay').textContent = '#' + result.booking_id;
+
+      currentWaUrl = result.whatsapp_url;
+      document.getElementById('waOpenBtn').href  = currentWaUrl;
+      document.getElementById('waRetryBtn').href = currentWaUrl;
+
+      showStep('step1');
+      new bootstrap.Modal(document.getElementById('successModal')).show();
+
+      // Auto-open WhatsApp for customer to send
+      setTimeout(() => window.open(currentWaUrl, '_blank'), 800);
+
+      this.reset();
+      this.classList.remove('was-validated');
+
+    } else {
+      showAlert(result.message || 'Something went wrong. Please try again.');
+    }
+  } catch(err) {
+    showAlert('Network error. Please check your connection.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🚜 Submit Booking — Notify Ram Babu';
+  }
+});
+
+function showStep(id) {
+  ['step1','step2sent','step2notsent'].forEach(s =>
+    document.getElementById(s).style.display = (s === id ? 'block' : 'none')
+  );
+}
+function markSent()    { setTimeout(() => showStep('step2sent'), 400); }
+function showNotSent() { showStep('step2notsent'); }
+function closeAndReset() {
+  bootstrap.Modal.getInstance(document.getElementById('successModal')).hide();
+  showStep('step1');
+}
+function showAlert(msg) {
+  const old = document.getElementById('dynAlert');
+  if (old) old.remove();
+  const el = document.createElement('div');
+  el.id = 'dynAlert';
+  el.className = 'alert alert-danger alert-dismissible fade show mt-3';
+  el.innerHTML = `${msg}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+  document.getElementById('bookingForm').insertAdjacentElement('beforebegin', el);
+  setTimeout(() => el?.remove(), 6000);
+}
+</script>
+{% endblock %}
